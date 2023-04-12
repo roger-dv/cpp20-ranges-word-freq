@@ -102,9 +102,7 @@ public:
   template<typename R>
     requires MovableRangeElement<R, T>
   void append_range(R &&rng) {
-    for(auto &&e : rng) {
-      this->collection.emplace_back(e);
-    }
+    std::ranges::for_each(rng, [this](auto &&e){ collection.emplace_back(e); });
   }
 
   inline iterator begin() noexcept {
@@ -132,9 +130,7 @@ using count_pair_t = std::pair<unsigned int, std::string>;
 template<typename C, typename E = typename C::value_type>
   requires std::ranges::range<C> && std::same_as<E, count_pair_t>
 void print_collection(const C &coll) {
-  for (const E &elem : coll) {
-    std::cout << elem.first << ": " << elem.second << '\n';
-  }
+  std::ranges::for_each(coll, [](const E &elem){ std::cout << elem.first << ": " << elem.second << '\n'; });
 }
 
 int main() {
@@ -202,9 +198,7 @@ int main() {
               | std::views::transform(flip_pair)
               | std::views::filter(collect_just_counts);
   // rng1 range will now be lazy evaluated as its elements are move appended to count_pairs
-  for(auto &&count_pair : rng1) {
-    count_pairs.emplace_back(count_pair);
-  }
+  std::ranges::for_each(rng1, [&count_pairs](auto &&count_pair){ count_pairs.emplace_back(count_pair); });
   // sort by word count
   std::ranges::sort(count_pairs, compare_counts);
 
