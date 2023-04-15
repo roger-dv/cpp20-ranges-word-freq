@@ -2,18 +2,17 @@
 
 This program is a solution to the problem described in Ivan Cukic's book, **Functional Programming in C++**, in chapter 4, section 4.3. It is the problem that Donald Knuth implemented a solution for in 10 pages of procedural Pascal code and was published in **Communications of the ACM** journal in 1986.
 
-Here in this implementation, features of C++20, principally ranges and concepts, are utilized in the solution. Using the `cloc` tool, it reports 158 lines of C++ code per this implementation:
+Here in this implementation, features of C++20, principally ranges and concepts, are utilized in the solution. Using the `cloc` tool, it reports 152 lines of C++ code per this implementation:
 
 ```sh
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-C++                              1             30             69            158
+C++                              1             30             69            152
 -------------------------------------------------------------------------------
-
 ```
 
-About 10 of those lines relate to printing out debug info, then there is a template class `collection_append` that is not strictly necessary but was just an exercise for implementing a class with collection-like behaviors as constrained by concepts, so removing that class would reduce the count by about another 50. Thus the actual implementation is around 90 to a 100 lines.
+About 10 of those lines relate to printing out debug info, then there is a template class `collection_append` that is not strictly necessary but was just an exercise for implementing a class with collection-like behaviors as constrained by concepts, so removing that class would reduce the count by about another 38. Thus the actual implementation is around a 100 lines.
 
 The compiler used is gcc/g++ at version 12.1 (should be noted that the C++20 format spec won't be supported until version 13 - in the absence of format support there is one case of using `printf`). The C++ library is statically linked (refer to the project `CMakeLists.txt` file).
 
@@ -23,7 +22,7 @@ However, there is a bit of frustration in using that syntax as extensively as on
 
 What is nice, though, is that a range as a function return result can be assigned to a `auto` local variable and then used in a manner to where there is lazy evaluation per actually iterating the range for subsequent processing.
 
-Oh, it can be noted that there is an extremely terse shell script approach, using piping, that is possible from a Unix shell - but just keep in mind that the small Unix tools made use of are each a relatively significant C program in their own right. Herein with this 90 to 100 lines of C++20 code, it is doing the equivalent to that assemblage of Unix small tool programs.
+Oh, it can be noted that there is an extremely terse shell script approach, using piping, that is possible from a Unix shell - but just keep in mind that the small Unix tools made use of are each a relatively significant C program in their own right. Herein with this ~ 100 lines of C++20 code, it is doing the equivalent to that assemblage of Unix small tool programs.
 
 Refer to Ivan Cukic's book, **Functional Programming in C++**, chapter 4, section 4.3 for this example, attributed to Doug McIlroy:
 
